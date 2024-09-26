@@ -1,0 +1,45 @@
+#!/bin/python3
+import socket
+import argparse
+import pyfiglet
+
+def create_fake_service_response(service_name, service_version):
+    if service_name.lower() == 'ftp':
+        return f"220 {service_name} service ready. Version {service_version}\r\n"
+    elif service_name.lower() == 'http':
+        return f"HTTP/1.1 200 OK\r\nServer: {service_name}/{service_version}\r\n"
+    elif service_name.lower() == 'smtp':
+        return f"220 {service_name} ESMTP Postfix\r\n"
+    else:
+        return f"{service_name} {service_version} service ready.\r\n"
+
+def start_port_spoofing(port, service_name, service_version):
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+        s.bind(('', port))  
+        s.listen(1)
+        print(f"[*] Listening on port {port}...")
+
+        while True:
+            con, addr = s.accept()
+            with con:
+                print(f"[*] Connection from {addr}")
+                response = create_fake_service_response(service_name, service_version)
+                con.sendall(response.encode('utf-8'))
+                print(f"[*] Sent fake banner: {response.strip()}")  
+
+def main():
+    parser = argparse.ArgumentParser(
+        description="Python based Port Spoofing Tool",
+        usage="%(prog)s -p PORT -s SERVICE -v VERSION",
+        epilog="\nExample - %(prog)s -p 22 -s ssh -v 6.7\n"
+    )
+    parser.add_argument('-p', '--port', metavar='PORT', dest="port", type=int, required=True, help='Port number to spoof')
+    parser.add_argument('-s', '--service', metavar='SERVICE', dest="service", type=str, required=True, help='Service name to spoof')
+    parser.add_argument('-v', '--version', metavar='VERSION', dest="version", type=str, required=True, help='Service version to spoof')
+
+    arg = parser.parse_args()
+    start_port_spoofing(arg.port, arg.service, arg.version)
+
+if __name__ == "__main__":
+    print(pyfiglet.figlet_format('PORT SPOOF'))
+    main()
