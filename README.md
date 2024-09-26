@@ -9,7 +9,8 @@ Security Script that creates fake responses on unused or closed ports to deceive
 
 # Help 
 
-![Screenshot 2024-09-26 173827](https://github.com/user-attachments/assets/6562f10a-4a15-4394-adc6-386066a3ef90)
+![Screenshot 2024-09-26 173733](https://github.com/user-attachments/assets/cea2f15e-9bdd-47f4-90f8-e785fda021ea)
+
 
 
 # Network Scan 
