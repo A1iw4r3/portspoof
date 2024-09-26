@@ -2,7 +2,7 @@
 Python based Portsoofing tool
 
 # Purpose
-Security Script that creates fake responses on unused or closed ports to deceive potential attackers. Instead of revealing which ports are open or closed, the server responds with fake, random services on each port, making it difficult for attackers to map or fingerprint services.
+Security project that creates fake responses on unused or closed ports to deceive potential attackers. Instead of revealing which ports are open or closed, the server responds with fake, random services on each port, making it difficult for attackers to map or fingerprint services.
 
 ![Screenshot 2024-09-26 173805](https://github.com/user-attachments/assets/5c9deb35-8283-4f8c-98cf-afff8229a56d)
 
